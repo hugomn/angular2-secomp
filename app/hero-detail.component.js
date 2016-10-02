@@ -18,9 +18,6 @@ var HeroDetailComponent = (function () {
         this.route = route;
         this.location = location;
     }
-    HeroDetailComponent.prototype.goBack = function () {
-        this.location.back();
-    };
     HeroDetailComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.route.params.forEach(function (params) {
@@ -28,6 +25,14 @@ var HeroDetailComponent = (function () {
             _this.heroService.getHero(id)
                 .then(function (hero) { return _this.hero = hero; });
         });
+    };
+    HeroDetailComponent.prototype.save = function () {
+        var _this = this;
+        this.heroService.update(this.hero)
+            .then(function () { return _this.goBack(); });
+    };
+    HeroDetailComponent.prototype.goBack = function () {
+        this.location.back();
     };
     HeroDetailComponent = __decorate([
         core_1.Component({
